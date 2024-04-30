@@ -20,6 +20,6 @@ def print_cred(r: requests.Response):
             "GPTSCRIPT_API_SPOTIFY_COM_BEARER_TOKEN": r.json()["access_token"],
         },
         "refreshToken": r.json()["refresh_token"],
-        "expiresAt": (datetime.datetime.utcnow() + datetime.timedelta(seconds=r.json()["expires_in"])).replace(microsecond=0).isoformat(),
+        "expiresAt": (datetime.datetime.utcnow() + datetime.timedelta(seconds=r.json()["expires_in"])).replace(microsecond=0).isoformat() + "Z",
     }
     print(json.dumps(cred))
