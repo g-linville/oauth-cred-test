@@ -1,3 +1,4 @@
 name: oauth
+args: service: the name of the service to log in to
 
-#!/usr/bin/env python3 ${GPTSCRIPT_TOOL_DIR}/main.py
+#!/usr/bin/env python3 ${GPTSCRIPT_TOOL_DIR}/main.py ${service}
