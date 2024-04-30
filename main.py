@@ -1,4 +1,5 @@
 import argparse
+import datetime
 import json
 import os
 import requests
@@ -8,8 +9,7 @@ import time
 import urllib.parse
 
 from data import LOGIN_MANAGER_ENDPOINT, SERVICES, SCOPES, REFRESH_DOMAINS
-from util import generate_random_string, capitalize_first_letter
-
+from util import generate_random_string, capitalize_first_letter, print_cred
 
 keep_running = True
 
@@ -53,7 +53,7 @@ if existing_json:
     if resp.status_code != 200:
         print("An error occurred while refreshing the token.", file=sys.stderr)
         exit(1)
-    print(resp.json())
+    print_cred(resp)
     exit(0)
 
 
@@ -68,7 +68,7 @@ try:
         time.sleep(2)
         resp = requests.get(f"{LOGIN_MANAGER_ENDPOINT}/api/get_token?state={state}")
         if resp.status_code == 200:
-            print(resp.json())
+            print_cred(resp)
             break
         elif resp.status_code != 404:
             print("An error occurred while fetching the token.", file=sys.stderr)
